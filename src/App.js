@@ -1,5 +1,12 @@
 import React from "react";
 import "./App.scss";
+import AOS from "aos";
+import Cube from "./3D";
+
+AOS.init({
+  offset: 100,
+  duration: 2000
+});
 
 function App() {
   return (
@@ -19,7 +26,7 @@ function App() {
         <div className='content'>
           <div className='left-container'>
             <div className='text-container'>
-              An app for easily creating designs
+              An app for easily creating designs and animations
             </div>
             <div className='icon-container'>
               <div className='icon-item'>
@@ -50,26 +57,32 @@ function App() {
           <span className='strong'>How</span> does it Work?
         </h2>
         <div className='icons-container'>
-          <div className='icon-item'>
+          <div className='icon-item' data-aos='fade-in'>
             <i className='fas fa-search search'></i>
             <p>
               <span className='strong'>Search</span> through hundreds of
               templates to draw inspiration
             </p>
           </div>
-          <div className='icon-item'>
+          <div className='icon-item' data-aos='fade-in'>
             <i className='fas fa-user-edit edit'></i>
             <p>
               <span className='strong'>Edit</span> and combining existing themes
             </p>
           </div>
-          <div className='icon-item'>
+          <div className='icon-item' data-aos='fade-in'>
             <i className='fas fa-heart create'></i>
             <p>
               <span className='strong'>Create</span> your own style
             </p>
           </div>
         </div>
+      </div>
+      <div id='animation-container'>
+        <p>
+          <span className='strong'>Animate</span> and implement
+        </p>
+        <Cube />
       </div>
     </div>
   );

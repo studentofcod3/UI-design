@@ -222,6 +222,15 @@
     }
   }
 
+  #animation-container{
+    display: flex;
+    flex-direction: column;
+    background: #0f0f0f;
+    color: #ccc;
+    font-size: 1.15rem;
+    padding: 4rem;
+  }
+
   @media (min-width: 768px) {
     .showcase{      
       .content{  
@@ -249,6 +258,20 @@
         flex-direction: row;
         justify-content: center;
         align-items: flex-start;
+      }
+    }
+
+    
+    #animation-container{
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      background: #0f0f0f;
+      color: #ccc;
+      font-size: 1.15rem;
+      
+      #3d-animation{
+
       }
     }
   }
