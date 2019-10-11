@@ -4,13 +4,14 @@ import {
   Scene,
   PerspectiveCamera,
   WebGLRenderer,
-  BoxGeometry,
-  MeshBasicMaterial,
-  Mesh
+  BoxBufferGeometry,
+  EdgesGeometry,
+  LineBasicMaterial,
+  LineSegments
 } from "three";
 
 function Cube() {
-  let camera, scene, renderer, cube;
+  let camera, scene, renderer, line;
 
   useEffect(() => {
     // Init scene
@@ -20,40 +21,42 @@ function Cube() {
     camera = new PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
-      0.1,
-      1000
+      1,
+      500
     );
+
+    // Position camera
+    camera.position.set(0, 0, 200);
+    camera.lookAt(0, 0, 0);
 
     // Init renderer
     renderer = new WebGLRenderer();
 
     // Set size
-    renderer.setSize(150, 150);
+    renderer.setSize(300, 300);
 
     // Render to canvas element
     document.getElementById("3d-animation").appendChild(renderer.domElement);
 
-    // Init BoxGeometry object
-    const geometry = new BoxGeometry(2, 2, 2);
+    // Init Geometry object
+    let geometry = new BoxBufferGeometry(100, 100, 100);
+
+    let edges = new EdgesGeometry(geometry);
 
     // Create material with color
-    const material = new MeshBasicMaterial({ color: 0x1658dd });
+    const material = new LineBasicMaterial({ color: 0xdddddd });
 
-    // Mesh geometry and material
-    cube = new Mesh(geometry, material);
+    // Mesh edges and material
+    line = new LineSegments(edges, material);
 
     // Add to scene
-    scene.add(cube);
-
-    // Position camera
-    camera.position.z = 5;
+    scene.add(line);
 
     const animate = () => {
       requestAnimationFrame(animate);
 
-      // Rotate cube (value on right dictates speed)
-      cube.rotation.x += 0.02;
-      cube.rotation.y += 0.02;
+      // Rotate
+      line.rotation.y += 0.02;
 
       renderer.render(scene, camera);
     };
@@ -66,7 +69,7 @@ function Cube() {
     // After making changes to aspect
     camera.updateProjectionMatrix();
     // Reset size
-    renderer.setSize(300, 300);
+    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
   };
 
   window.addEventListener("resize", onWindowResize, false);
